@@ -17,12 +17,12 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Student> storeStudent(@RequestBody Student student) {
+    public ResponseEntity<?> storeStudent(@RequestBody Student student) {
         Student result = studentService.studentValidate(student);
 
         if(result == null)
         {
-           return ResponseEntity.status(400).body(result);
+           return ResponseEntity.status(400).body("Invalid input");
         }
         return  ResponseEntity.status(201).body(result);
     }

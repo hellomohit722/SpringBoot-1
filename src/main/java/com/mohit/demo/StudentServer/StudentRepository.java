@@ -1,12 +1,8 @@
 package com.mohit.demo.StudentServer;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class StudentRepository {
 
-    public Student save(Student student) {
-        System.out.println("Student Information saved");
-        return student;
-    }
+public interface StudentRepository extends JpaRepository<Student, Integer> {
+
 }
