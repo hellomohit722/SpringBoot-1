@@ -1,4 +1,4 @@
-package com.mohit.demo.StudentServer;
+package com.mohit.demo.StudentServer.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
