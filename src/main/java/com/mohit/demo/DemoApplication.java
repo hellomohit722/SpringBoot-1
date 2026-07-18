@@ -4,6 +4,9 @@ import com.mohit.demo.DependencyInjection.OrderService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @SpringBootApplication
@@ -21,5 +24,20 @@ public class DemoApplication {
 //		OrderService orderService = context.getBean(OrderService.class);
 //		orderService.placeOrder();
 
+
+
+	}
+
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+						.allowedOrigins("http://127.0.0.1:5500", "http://localhost:5500")
+						.allowedMethods("*")
+						.allowedHeaders("*");
+			}
+		};
 	}
 }

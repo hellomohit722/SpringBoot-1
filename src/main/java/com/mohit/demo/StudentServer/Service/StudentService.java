@@ -23,10 +23,10 @@ public class StudentService {
         int age = student.getAge();
         String department = student.getDepartment();
 
-        if (id <= 0 || name == null || name.isBlank()
-                || age <= 0 || department == null || department.isBlank()) {
-            return null;
-        }
+//        if (id <= 0 || name == null || name.isBlank()
+//                || age <= 0 || department == null || department.isBlank()) {
+//            return null;
+//        }
 
         student.setCreatedAt(LocalDateTime.now());
         student.setUpdatedAt(LocalDateTime.now());
