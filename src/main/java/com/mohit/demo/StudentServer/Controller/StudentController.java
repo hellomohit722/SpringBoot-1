@@ -1,5 +1,7 @@
 package com.mohit.demo.StudentServer.Controller;
 
+import com.mohit.demo.StudentServer.DTO.CreateStudentRequestDTO;
+import com.mohit.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.mohit.demo.StudentServer.Entity.Student;
 import com.mohit.demo.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,8 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> storeStudent(@RequestBody Student student) {
-        Student result = studentService.studentValidate(student);
+    public ResponseEntity<?> storeStudent(@RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
+        CreateStudentResponseDTO result = studentService.studentValidate(createStudentRequestDTO);
 
         if(result == null)
         {
