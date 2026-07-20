@@ -60,12 +60,3 @@ public class StudentController {
         return ResponseEntity.status(200).body("Student deleted");
     }
 }
-
-
-
-
-
-
-
-
-
