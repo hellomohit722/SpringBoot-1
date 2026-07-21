@@ -17,9 +17,6 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @NotBlank(message = "Name cannot be empty")
-    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
 
     @Min(value = 1, message = "Age must be greater than 0")
