@@ -8,14 +8,11 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class CreateStudentRequestDTO {
+public class UpdateStudentRequestDTO {
 
     @NotBlank(message = "Name cannot be empty")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
     @Min(value = 1, message = "Age must be greater than 0")
     private int age;
-    @NotBlank(message = "Department cannot be empty")
-    @Size(min = 2, max = 50, message = "Department must be between 2 and 50 characters")
-    private String department;
 }

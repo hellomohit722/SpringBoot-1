@@ -18,16 +18,9 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-
-    @Min(value = 1, message = "Age must be greater than 0")
     private int age;
-
-    @NotBlank(message = "Department cannot be empty")
-    @Size(min = 2, max = 50, message = "Department must be between 2 and 50 characters")
     private String department;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 
     // Getters and Setters

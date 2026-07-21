@@ -2,12 +2,15 @@ package com.mohit.demo.StudentServer.Service;
 
 import com.mohit.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.mohit.demo.StudentServer.DTO.CreateStudentResponseDTO;
+import com.mohit.demo.StudentServer.DTO.UpdateStudentRequestDTO;
+import com.mohit.demo.StudentServer.DTO.UpdateStudentResponseDTO;
 import com.mohit.demo.StudentServer.Entity.Student;
 import com.mohit.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -25,24 +28,28 @@ public class StudentService {
         return mapToResponseDTO(student);
     }
 
-    public Student getStudentById(int id) throws Exception {
-        return studentRepository.findById(id).orElseThrow(()->new Exception());
+    public Student getStudentById(int id) {
+        Optional<Student> student = studentRepository.findById(id);
+        return student.get();
     }
 
-    public Student studentUpdate(int id, Student student) {
+    public UpdateStudentResponseDTO studentUpdate(
+            int id,
+            UpdateStudentRequestDTO updateStudentRequestDTO) {
 
-        Student result = studentRepository.findById(id).orElse(null);
+        Student student = studentRepository.findById(id).orElse(null);
 
-        if (result == null) {
+        if (student == null) {
             return null;
         }
 
-        result.setName(student.getName());
-        result.setAge(student.getAge());
-        result.setDepartment(student.getDepartment());
-        result.setUpdatedAt(LocalDateTime.now());
+        student.setName(updateStudentRequestDTO.getName());
+        student.setAge(updateStudentRequestDTO.getAge());
+        student.setUpdatedAt(LocalDateTime.now());
 
-        return studentRepository.save(result);
+        studentRepository.save(student);
+
+        return mapToUpdateResponseDTO(student);
     }
 
     public Student deleteStudent(int id) {
@@ -76,4 +83,18 @@ public class StudentService {
         return createStudentResponseDTO;
 
     }
+
+    private UpdateStudentResponseDTO mapToUpdateResponseDTO(Student student) {
+
+        UpdateStudentResponseDTO dto = new UpdateStudentResponseDTO();
+
+        dto.setId(student.getId());
+        dto.setName(student.getName());
+        dto.setAge(student.getAge());
+        dto.setDepartment(student.getDepartment());
+
+        return dto;
+    }
+
+
 }
