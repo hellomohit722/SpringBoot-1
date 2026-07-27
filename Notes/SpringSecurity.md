@@ -1017,14 +1017,78 @@ Response
 
 This is the complete authentication and authorization lifecycle for a Spring Boot application using Spring Security with HTTP Basic or Form Login.
 
+---
 
 
+# JWT (JSON Web Token) Notes
 
+## What is a JWT?
+* JWT is a way to securely transmit information between parties as a JSON object.
+* JWT is a compact, URL-safe token that can carry information between parties.
+* A JWT is a string consisting of three parts, separated by dots (`.`).
 
+---
 
+## JWT Structure
+A JWT consists of three distinct parts:
+* **Header**
+* **Payload**
+* **Signature**
 
+---
 
+### 1. Header
+The header typically consists of two parts: the type of the token (`JWT`) and the signing algorithm being used, such as `HMAC SHA256` or `RSA`.
 
+```json
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+```
+
+### 2. Payload
+The payload contains the claims. Claims are statements about an entity (typically, the user) and additional metadata.
+
+```json
+{
+  "email": "email@gmail.com",
+  "name": "John Doe"
+}
+```
+### 3. Signature
+The signature is used to verify that the sender of the JWT is who it says it is and to ensure that the message wasn't changed along the way.
+
+To create the signature part, you have to take the encoded header, the encoded payload, a secret, the algorithm specified in the header, and sign that.
+
+Example Calculation:
+
+```text
+HMACSHA256(
+  secret,
+  base64UrlEncode(header) + "." + base64UrlEncode(payload)
+)
+```
+
+## Maven Dependencies (Spring Boot / JJWT 0.12.5)
+```xml
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.12.5</version>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-jackson</artifactId>
+    <version>0.12.5</version>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-impl</artifactId>
+    <version>0.12.5</version>
+    <scope>runtime</scope>
+</dependency>
+```
 
 
 

@@ -59,7 +59,6 @@ import org.springframework.security.web.SecurityFilterChain;
 //
 //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//
 //        http
 //                .csrf(csrf -> csrf.disable())
 //                .authorizeHttpRequests(auth -> auth
@@ -76,7 +75,6 @@ import org.springframework.security.web.SecurityFilterChain;
 //    public PasswordEncoder passwordEncoder() {
 //        return new BCryptPasswordEncoder();
 //    }
-
 //}
 
 // JWT-------------------------------------------------------------------------------
