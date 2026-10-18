@@ -4,13 +4,11 @@ package com.mohit.demo.Filter;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component
-@Order(1)
+//@Component
+//@Order(1)
 public class AuthenticationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -22,11 +20,12 @@ public class AuthenticationFilter implements Filter {
         String token = httpRequest.getHeader("token");
 
         String apiKey = httpRequest.getHeader("api-key");
+        System.out.println("API Key: " + apiKey);
 
         if(apiKey == null || !apiKey.equals("my-key")){
             httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             httpResponse.setContentType("application/json;charset=utf-8");
-            httpResponse.getWriter().write("API Key is missing or invalid");
+            httpResponse.getWriter().write("{\"API-Key\":\"NULL\"}");
             return;
         }
 
@@ -37,7 +36,13 @@ public class AuthenticationFilter implements Filter {
             return;
         }
 
+        String uri = httpRequest.getRequestURI();
 
+        if(!uri.startsWith("/api")) {
+            httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            httpResponse.getWriter().write("Access denied");
+            return;
+        }
 
         chain.doFilter(request,response);
 
